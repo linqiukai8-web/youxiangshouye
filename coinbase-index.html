@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coinbase 热钱包私钥找回 | 专业加密资产恢复服务</title>
+  <meta name="description" content="专业Coinbase热钱包遗忘私钥找回服务，安全、合规、高效。支持多种Coinbase钱包类型。" />
+  <style>
+    :root {
+      --primary: #0052ff;
+      --primary-dark: #003db3;
+      --bg: #0b0e17;
+      --card: #151a27;
+      --text: #e8ecf4;
+      --muted: #8b95a8;
+      --success: #00c853;
+      --border: #2a3142;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(11, 14, 23, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 28px;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 0%, #a0b4ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      margin-left: 16px;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Features */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 50px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(0, 82, 255, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Process */
+    .process {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      counter-reset: step;
+    }
+
+    .step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      width: 240px;
+      text-align: center;
+      position: relative;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .step h4 {
+      margin: 16px 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Trust */
+    .trust-bar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .trust-bar h3 {
+      margin-bottom: 24px;
+      font-size: 1.3rem;
+    }
+
+    .trust-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trust-item strong {
+      font-size: 1.6rem;
+      color: var(--primary);
+    }
+
+    .trust-item span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      max-width: 520px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      nav {
+        display: none;
+      }
+      .btn-outline {
+        margin-left: 0;
+        margin-top: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <span>■</span> WalletRecover Pro
+      </div>
+      <nav>
+        <a href="#services">服务</a>
+        <a href="#process">流程</a>
+        <a href="#contact">联系我们</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>专业 Coinbase 热钱包<br>遗忘私钥找回服务</h1>
+      <p>我们专注于帮助用户安全、合规地找回因遗忘私钥、助记词损坏、设备丢失等原因无法访问的 Coinbase 热钱包资产。</p>
+      <a href="#contact" class="btn">立即咨询</a>
+      <a href="#process" class="btn btn-outline">了解流程</a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="container">
+      <h2 class="section-title">我们能帮您找回什么</h2>
+      <p class="section-sub">针对 Coinbase 生态内多种热钱包场景提供专业恢复支持</p>
+      <div class="grid">
+        <div class="card">
+          <div class="card-icon">🔑</div>
+          <h3>遗忘私钥 / 助记词</h3>
+          <p>因时间久远忘记私钥或助记词，导致无法登录钱包。我们提供合法合规的恢复路径。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <h3>设备丢失 / 损坏</h3>
+          <p>手机丢失、损坏或系统重置后无法访问原有 Coinbase 钱包的情况。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔄</div>
+          <h3>迁移与备份失败</h3>
+          <p>从旧设备迁移钱包失败、备份文件损坏或导入错误导致资产无法访问。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>多类型钱包支持</h3>
+          <p>覆盖 Coinbase Wallet 浏览器扩展、移动端 App 及其他相关热钱包场景。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section" id="process">
+    <div class="container">
+      <h2 class="section-title">专业恢复流程</h2>
+      <p class="section-sub">透明、可追溯、以用户资产安全为第一优先级</p>
+      <div class="process">
+        <div class="step">
+          <h4>提交咨询</h4>
+          <p>填写基本信息与钱包情况，我们会进行初步评估</p>
+        </div>
+        <div class="step">
+          <h4>专业诊断</h4>
+          <p>技术团队分析可恢复性，并给出明确方案与费用</p>
+        </div>
+        <div class="step">
+          <h4>安全恢复</h4>
+          <p>在用户授权与确认下执行恢复操作，全程可审计</p>
+        </div>
+        <div class="step">
+          <h4>资产交还</h4>
+          <p>成功后资产直接交还给您，并提供完整操作记录</p>
+        </div>
+      </div>
+
+      <div class="trust-bar">
+        <h3>为什么选择我们</h3>
+        <div class="trust-items">
+          <div class="trust-item">
+            <strong>专注</strong>
+            <span>Coinbase 生态专项</span>
+          </div>
+          <div class="trust-item">
+            <strong>安全</strong>
+            <span>不索取私钥操作权</span>
+          </div>
+          <div class="trust-item">
+            <strong>透明</strong>
+            <span>费用与流程全程公开</span>
+          </div>
+          <div class="trust-item">
+            <strong>合规</strong>
+            <span>仅服务合法资产所有人</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2 class="section-title">开始咨询</h2>
+      <p class="section-sub">请填写以下信息，我们会在 24 小时内回复评估结果</p>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label>您的称呼 / 联系方式</label>
+          <input type="text" name="name" placeholder="姓名 / Telegram / 邮箱" required />
+        </div>
+        <div class="form-group">
+          <label>钱包类型</label>
+          <select name="wallet" required>
+            <option value="">请选择</option>
+            <option value="coinbase-wallet-app">Coinbase Wallet App</option>
+            <option value="coinbase-wallet-extension">Coinbase Wallet 浏览器扩展</option>
+            <option value="other">其他 Coinbase 相关钱包</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>问题描述</label>
+          <textarea name="desc" placeholder="请简要描述：是否还有助记词片段、设备情况、大概时间等（不要在此填写真实私钥）" required></textarea>
+        </div>
+        <button type="submit" class="btn" style="width:100%;">提交咨询</button>
+        <p style="margin-top:16px;font-size:0.85rem;color:var(--muted);text-align:center;">
+          提交后不会立即产生费用，我们会先评估可行性
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 WalletRecover Pro · 专业加密资产恢复服务</p>
+      <p style="margin-top:8px;">本服务仅面向合法资产所有人 · 严禁用于任何非法用途</p>
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      const name = data.get('name');
+      const wallet = data.get('wallet');
+      const desc = data.get('desc');
+
+      // 这里可以替换成你的实际接收方式：
+      // 1. 跳转到 Telegram
+      // 2. 发送到邮箱
+      // 3. 接入你自己的后端 API
+      alert(`感谢提交！\n\n我们已收到您的咨询信息。\n\n请稍后通过您留下的联系方式等待回复。\n（当前为演示版本，实际可对接 Telegram / 邮箱 / 后端接口）`);
+
+      form.reset();
+    }
+  </script>
+</body>
+</html>
